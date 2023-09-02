@@ -21,9 +21,37 @@ class Channel:
         self.title = self.channel.get('items')[0].get('snippet').get('title')
         self.description = self.channel.get('items')[0].get('snippet').get('description')
         self.url = 'https://www.youtube.com/' + self.channel.get('items')[0].get('snippet').get('customUrl')
-        self.subscriberCount = self.channel.get('items')[0].get('statistics').get('subscriberCount')
+        self.subscriberCount = int(self.channel.get('items')[0].get('statistics').get('subscriberCount'))
         self.video_count = self.channel.get('items')[0].get('statistics').get('videoCount')
         self.viewCount = self.channel.get('items')[0].get('statistics').get('viewCount')
+
+    def __str__(self):
+        """ Возвращает название и ссылку на канал"""
+        return f"{self.title} ({self.url})"
+
+    def __add__(self, other):
+        """Складывает количество подписчиков двух каналов"""
+        return self.subscriberCount + other.subscriberCount
+
+    def __sub__(self, other):
+        """Вычитает количество подписчиков двух каналов"""
+        return self.subscriberCount - other.subscriberCount
+
+    def __gt__(self, other):
+        """Сравнивает, где больше подписчиков двух каналов"""
+        return self.subscriberCount > other.subscriberCount
+
+    def __ge__(self, other):
+        """Сравнивает, где больше или равно подписчиков двух каналов"""
+        return self.subscriberCount >= other.subscriberCount
+
+    def __lt__(self, other):
+        """Сравнивает, где меньше подписчиков двух каналов"""
+        return self.subscriberCount < other.subscriberCount
+
+    def __le__(self, other):
+        """Сравнивает, где меньше или равно подписчиков двух каналов"""
+        return self.subscriberCount <= other.subscriberCount
 
 
     def print_info(self) -> None:
