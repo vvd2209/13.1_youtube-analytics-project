@@ -1,19 +1,9 @@
 # -*- coding: utf-8 -*-
-from googleapiclient.discovery import build
-import os
 import datetime
 import isodate
+from src.APIMixin import APIMixin
 
-api_key: str = os.getenv('YT_API_KEY')
-
-class PlayList:
-    youtube = build('youtube', 'v3', developerKey=api_key)
-
-    @classmethod
-    def get_service(cls):
-        """Возвращает объект для работы с YouTube API"""
-        return cls.youtube
-
+class PlayList(APIMixin):
     def __init__(self, playlist_id: str):
         """
         Экземпляр инициализируется по id плейлиста. Дальше все данные будут подтягиваться по API.
